@@ -1,16 +1,6 @@
-<% if @room.errors.any? %>
-  <div class="alert alert-danger">
-    <h4>以下のエラーがあります。</h4>
-    <ul>
-      <% @room.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<h2>施設の編集</h2>
 
-<h2>施設の新規登録</h2>
-<%= form_with model: @room , url: rooms_path , local: true do |f| %>
+<%= form_with model:@room do |f| %>
   <div>
     <%= f.label :施設名 %><br>
     <%= f.text_field :roomname %>
@@ -36,6 +26,5 @@
     <%= f.file_field :image %>
   </div>
 
-  <%= f.submit "登録" %>
-
+<%= f.submit "登録" %>
 <% end %>

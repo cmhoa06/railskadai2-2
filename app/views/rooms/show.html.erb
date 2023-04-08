@@ -1,10 +1,30 @@
 <h2>施設詳細</h2>
 
-<table>
-  <tr>
-    <td><%= @room.roomname %></td>
-    <td><%= @room.address %></td>
-    <td><%= @room.description %></td>
-    <td><%= @room.price %></td>
-  </tr>
-</table>
+<%= link_to "戻る",:back %>
+<%= link_to "編集", edit_room_path %>
+
+<%= @rooms.each do |room| %>
+  <div>
+    <% if room.image?  %>
+      <%= image_tag room.image.url %>
+    <% else %>
+      <%= image_tag 'https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png' %>
+    <% end %>
+
+    <tr>
+      <td>ルーム名：<%= room.roomname %></td>
+    </tr>
+
+    <tr>
+      <td>住所 : <%= room.address %></td>
+    </tr>
+
+    <tr>
+      <td>ルーム詳細：<%= room.description %></td>
+    </tr>
+
+    <tr>
+      <td>金額：￥<%= room.price %>〜</td>
+    </tr>
+  </div>
+<% end %>

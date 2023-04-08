@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  get 'rooms/index'
   get 'users/profile/edit/', to: 'users/profiles#edit'
   get 'users/profile/show/', to: 'users/profiles#show'
   get '/users/:id', to: 'users/accounts#show'
@@ -9,5 +10,7 @@ Rails.application.routes.draw do
   resources :users
   resources :rooms
   resources :pages
+  resources :reservations
   get 'search' => 'rooms#search'
+  post 'users/:id/edit' => 'users#show'
 end

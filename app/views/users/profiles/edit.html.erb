@@ -1,9 +1,24 @@
-<%= form_for @user do |f| %>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-  
-    <%= f.label :profile %>
-    <%= f.text_area :profile %>
-  
-    <%= f.submit 'save' %>
-  <% end %>
+<h2>プロフィール編集</h2>
+
+<%= form_with model:@user do |f| %>
+  <div>
+  <%= f.label :image %><br>
+  <%= f.file_field :image %> 
+  </div>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :introduction %><br>
+    <%= f.text_area :introduction, :size=>"60x10" %>
+  </div>
+
+  <div>
+    <%= f.submit "保存" %>
+  </div>
+<% end %>
+
+<%= link_to "キャンセル", :back %>
