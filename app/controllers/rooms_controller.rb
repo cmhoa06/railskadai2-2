@@ -16,7 +16,8 @@ class RoomsController < ApplicationController
     
 
     if @room.save
-      redirect_to @room , notice: '宿泊施設を登録しました'
+      flash[:notice] = '宿泊施設を登録しました'
+      redirect_to @room 
     else
       render :new
     end
@@ -28,6 +29,7 @@ class RoomsController < ApplicationController
     @rooms = Room.all
     @rooms = @rooms.where(area: params[:area]) if params[:area].present?
     @rooms = @rooms.where("name like?" , "%#{params[:keyword]}%") if params[:keyword].present?
+    @reservation = Reservation.new
   end
 
   def edit
@@ -38,16 +40,22 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
 
     if @room.update(room_params)
-        redirect_to @room , notice: '宿泊施設を更新しました'
-      else
+        flash[:notice] = '宿泊施設を更新しました'
+        redirect_to @room   
+    else
         render :edit
-      end
+    end
   end
 
   def destroy
     @room = Room.find(params[:id])
     @room.destroy
     redirect_to rooms_url , notice: '宿泊施設を削除しました'
+  end
+
+  def search
+    @results = @q.result
+    @numbers = @q.result.count
   end
 
   private

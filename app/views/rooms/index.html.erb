@@ -2,8 +2,9 @@
 <table>
   <thead>
     <tr>
+      <th>画像</th>
       <th>施設名</th>
-      <th>紹介文</th>
+      <th>施設紹介</th>
       <th>料金</th>
       <th>作成日</th>
       <th>編集</th>
@@ -13,7 +14,14 @@
   <tbody>
     <% @rooms.each do |room| %>
       <tr>
-        <td><%= room.roomname %></td>
+        <td>
+          <% if room.image? %>
+            <%= image_tag  room.image.url %>
+          <% else %>
+            <%= image_tag 'https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png' %>
+          <% end %>
+        </td>                    
+        <td><%= link_to room.roomname, room_path(room) %></td>
         <td><%= room.description %></td>
         <td><%= room.price %></td>
         <td><%= room.updated_at %></td>

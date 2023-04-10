@@ -1,0 +1,23 @@
+<h2>予約内容の確認</h2>
+
+<h3>チェックイン日</h3>
+<% @reservation.checkin_at.to_s(:datetime_jp) %>
+
+<h3>チェックアウト日</h3>
+<% @reservation.checkout_at.to_s(:datetime_jp) %>
+
+<h3>日数</h3>
+<% @reservation.total_day %>
+
+<h3>人数</h3>
+<% @reservation.person_count %>
+
+<h3>お支払い金額</h3>
+<% @reservation.total_price %>
+
+<h3>上記内容で正しければ「確定」ボタンを押してください。</h3>
+
+<%= form_with model: @reservation do |f| %>
+  <%= f.submit "予約を確定" %>
+  <%= link_to "キャンセル" , :back %>
+<% end%>

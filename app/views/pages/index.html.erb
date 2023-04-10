@@ -5,15 +5,3 @@
   <%= text_field_tag :search, params[:search] %>
   <%= submit_tag "検索", name: nil %>
   </p>
-
-
-<table>
-  <% @rooms.each do |room| %>
-    <tr>
-      <td><%= room.roomname %></td>
-	  <td><%= room.address %></td>
-	  <td><%= room.description %></td>
-	  <td><%= room.price %></td>
-    </tr>
-  <% end %>
-</table>

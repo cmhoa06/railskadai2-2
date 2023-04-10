@@ -1,0 +1,43 @@
+<%= form_tag rooms_path, method: :get do %>
+  <%= label_tag :area, "エリア:" %>
+  <%= select_tag :area, options_for_select(["東京", "大阪", "京都", "札幌"], params[:area]), include_blank: true %>
+  <%= label_tag :keyword, "キーワード:" %>
+  <%= text_field_tag :keyword, params[:keyword] %>
+  <%= submit_tag "検索" %>
+<% end %>
+
+<h2>検索結果：<%= @results.count %>件</h2>
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>詳細</th>
+      <th>料金</th>
+      <th>住所</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @results.each do |room| %>
+      <tr>
+          <td>
+            <div>
+                <% if room.image? %>
+                    <%= image_tag  room.image.url %>
+                <% else %>
+                    <%= image_tag 'https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png' %>
+                <% end %>
+            </div>
+          </td>
+          <td><%= link_to roomname, room_path(room) %></td>
+          <td><%= room.description %></td>
+          <td><%= room.price %></td>
+          <td><%= room.address %></td>
+        </tr>
+    <% end %>
+  </tbody>
+
+</table>
+<%= link_to "Top" , root_path %>
+

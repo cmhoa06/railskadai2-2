@@ -7,6 +7,7 @@ class Room < ApplicationRecord
 
   belongs_to :user , optional: true
   has_one :reservation
+  has_many :reservations 
 
   def self.search(search)
     if search != ""

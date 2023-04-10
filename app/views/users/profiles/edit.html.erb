@@ -2,17 +2,17 @@
 
 <%= form_with model:@user do |f| %>
   <div>
-  <%= f.label :image %><br>
+  <%= f.label :画像 %><br>
   <%= f.file_field :image %> 
   </div>
 
   <div>
-    <%= f.label :name %><br>
+    <%= f.label :ユーザー名 %><br>
     <%= f.text_field :name %>
   </div>
 
   <div>
-    <%= f.label :introduction %><br>
+    <%= f.label :自己紹介 %><br>
     <%= f.text_area :introduction, :size=>"60x10" %>
   </div>
 
