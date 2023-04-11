@@ -1,9 +1,9 @@
 class Room < ApplicationRecord
   mount_uploader :image, ImageUploader
   has_one_attached :image
-  validates :roomname , presence: true
+  validates :name , presence: true
   validates :address , presence: true
-  validates :price , presence: true , numericality: { greater_than_or_equal_to: 0 }
+  validates :fee , presence: true , numericality: { greater_than_or_equal_to: 0 }
 
   belongs_to :user , optional: true
   has_one :reservation

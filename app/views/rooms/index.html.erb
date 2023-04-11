@@ -21,9 +21,9 @@
             <%= image_tag 'https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png' %>
           <% end %>
         </td>                    
-        <td><%= link_to room.roomname, room_path(room) %></td>
-        <td><%= room.description %></td>
-        <td><%= room.price %></td>
+        <td><%= link_to room.name, room_path(room) %></td>
+        <td><%= room.introduction %></td>
+        <td><%= room.fee %></td>
         <td><%= room.updated_at %></td>
         <td><%= link_to "詳細" , room_path(room) %></td>
         <td><%= link_to "編集" , edit_room_path(room) %></td>

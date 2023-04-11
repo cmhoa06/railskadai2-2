@@ -8,7 +8,7 @@ class Reservation < ApplicationRecord
   validate :in_out_check
 
   has_one_attached :image
-  
+
   def in_out_check
     if checkin_at.present? && checkout_at.present? && checkin_at > checkout_at
       errors.add(:checkout_at, "は開始日より後の日付を入力してください")
