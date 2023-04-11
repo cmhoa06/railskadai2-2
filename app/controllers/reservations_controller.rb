@@ -11,15 +11,16 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @room = Room.find_by(params[:reservation][:room_id])
+    @room = Room.find(params[:reservation][:room_id])
     @user = User.find_by(params[:reservation][:room_id])
-    @reservation = Reservation.new(params.require(:reservation).permit(:checkin_at, :checkout_at, :person_count, :user_id, :room_id))
+    @reservation = Reservation.new(reservation_params)
     
     if @reservation.save
+      binding.pry
       flash[:notice] = "予約に成功しました"
       redirect_to reservations_path
     else
-      
+      binding.pry
       flash.now[:alert] = "予約に失敗しました"
       render 'rooms/show'
     end
@@ -41,6 +42,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:start_date, :end_date, :person_count)
+    params.require(:reservation).permit(:checkin_at, :checkout_at, :person_count , :user_id , :room_id , :total_price , :total_day)
   end
 end
