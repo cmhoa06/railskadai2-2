@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   def index
     @user = current_user
-    @reservations = current_user.reservations
+    @reservations = Reservation.all
   end
 
   def new
@@ -14,7 +14,7 @@ class ReservationsController < ApplicationController
     @room = Room.find(params[:reservation][:room_id])
     @user = User.find_by(params[:reservation][:room_id])
     @reservation = Reservation.new(params.require(:reservation).permit(:checkin_at, :checkout_at, :person_count, :user_id, :room_id ,:created_at , :updated_at))
-  
+    
     if @reservation.save
       
       flash[:notice] = "予約に成功しました"
@@ -27,7 +27,6 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    binding.pry
     @reservation = Reservation.find(params[:id])
   end
 
