@@ -1,7 +1,7 @@
 <h2>施設詳細</h2>
 
 <%= link_to "戻る",:back %>
-<%= link_to "編集", edit_room_path %>
+<%= link_to "編集", edit_room_path(@room) %>
 
   <div>
     <% if @room.image?  %>

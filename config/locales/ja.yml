@@ -182,3 +182,20 @@ ja:
       short: "%m/%d %H:%M"
     pm: 午後
 
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        introduction: 紹介
+        fee: 価格
+      room:
+        checkin_at: 開始日
+        checkout_at: 終了日
+        name: 施設名
+        address: 住所
+        fee: 料金
+

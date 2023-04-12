@@ -13,14 +13,14 @@
   <tbody>
     <% @reservations.each do |reservation| %>
       <tr>
-        <td><% %></td>
-        <td><%= reservation.room.description %></td>
+        <td><%= link_to reservation.room.name , reservation.room %></td>
+        <td><%= reservation.room.introduction %></td>
         <td>¥<%= reservation.total_price %></td>
         <td><%= reservation.checkin_at.strftime("%Y/%m/%d") %></td>
         <td><%= reservation.checkout_at.strftime("%Y/%m/%d") %></td>
         <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
         <td>
-          <%= link_to "予約を削除" , reservation , method: :delete , data: { comfilm: "本当に削除しますか？" } %>
+          <%= link_to "予約を削除" , reservation_path , method: :delete , data: { comfilm: "本当に削除しますか？" } %>
         </td>
       </tr>
     <% end %>

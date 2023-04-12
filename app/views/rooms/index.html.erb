@@ -23,7 +23,7 @@
         </td>                    
         <td><%= link_to room.name, room_path(room) %></td>
         <td><%= room.introduction %></td>
-        <td><%= room.fee %></td>
+        <td>¥<%= room.fee %>〜</td>
         <td><%= room.updated_at %></td>
         <td><%= link_to "詳細" , room_path(room) %></td>
         <td><%= link_to "編集" , edit_room_path(room) %></td>

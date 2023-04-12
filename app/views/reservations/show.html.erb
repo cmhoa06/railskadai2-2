@@ -1,3 +1,14 @@
+<% if @reservation.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>以下のエラーがあります。</h4>
+    <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h2>予約内容の確認</h2>
 
 <h3>チェックイン日</h3>
@@ -19,5 +30,6 @@
 
 <%= form_with model: @reservation do |f| %>
   <%= f.submit "予約を確定" %>
-  <%= link_to "キャンセル" , :back %>
 <% end %>
+  <%= link_to "キャンセル" , root_path %>
+

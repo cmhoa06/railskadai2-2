@@ -7,26 +7,28 @@ class ReservationsController < ApplicationController
   def new
     @user = current_user
     @reservation = Reservation.new
-
+    
   end
 
   def create
-    @room = Room.find_by(params[:reservation][:room_id])
+    @room = Room.find(params[:reservation][:room_id])
     @user = User.find_by(params[:reservation][:room_id])
-    @reservation = Reservation.new(params.require(:reservation).permit(:checkin_at, :checkout_at, :person_count, :user_id, :room_id))
-
+    @reservation = Reservation.new(params.require(:reservation).permit(:checkin_at, :checkout_at, :person_count, :user_id, :room_id ,:created_at , :updated_at))
+  
     if @reservation.save
+      
       flash[:notice] = "予約に成功しました"
-      redirect_to reservations_path
+      redirect_to reservations_path (@reservation)
     else
-
+      
       flash.now[:alert] = "予約に失敗しました"
-      render 'rooms/show'
+      render "rooms/show"
     end
   end
 
   def show
-    @reservation =Reservation.find(params[:id])
+    binding.pry
+    @reservation = Reservation.find(params[:id])
   end
 
   def edit
@@ -41,6 +43,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:start_date, :end_date, :person_count)
+    params.require(:reservation).permit(:checkin_at, :checkout_at, :person_count , :user_id, :room_id , :created_at , :updated_at)
   end
 end
