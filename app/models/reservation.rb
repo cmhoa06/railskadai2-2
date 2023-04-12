@@ -8,18 +8,10 @@ class Reservation < ApplicationRecord
   validate :in_out_check
 
   has_one_attached :image
-
   def in_out_check
     if checkin_at.present? && checkout_at.present? && checkin_at > checkout_at
       errors.add(:checkout_at, "は開始日より後の日付を入力してください")
     end
   end
-
-  def total_day
-    total_day = (checkout_at.to_date - checkin_at.to_date).to_i
-  end
-
-  def total_price
-    total_price = (total_day * person_count * room.fee)
-  end
+  
 end

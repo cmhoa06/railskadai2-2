@@ -1,35 +1,32 @@
-<% if @reservation.errors.any? %>
-  <div class="alert alert-danger">
-    <h4>以下のエラーがあります。</h4>
-    <ul>
-      <% @reservation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<h2>予約内容の確認</h2>
-
-<h3>チェックイン日</h3>
-<% @reservation.checkin_at.to_s(:datetime_jp) %>
-
-<h3>チェックアウト日</h3>
-<% @reservation.checkout_at.to_s(:datetime_jp) %>
-
-<h3>日数</h3>
-<% @reservation.total_day %>
-
-<h3>人数</h3>
-<% @reservation.person_count %>
-
-<h3>お支払い金額</h3>
-<% @reservation.total_price %>
-
-<h3>上記内容で正しければ「確定」ボタンを押してください。</h3>
-
-<%= form_with model: @reservation do |f| %>
-  <%= f.submit "予約を確定" %>
-<% end %>
-  <%= link_to "キャンセル" , root_path %>
-
+<h2>予約済み施設一覧</h2>
+<table>
+  <thead>
+    <tr>
+      <th>施設名</th>
+      <th>施設紹介</th>
+      <th>合計金額</th>
+      <th>チェックイン日</th>
+      <th>チェックアウト日</th>
+      <th>予約確定日時</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% if @reservations == true %>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= link_to reservation.room.name , room_path(reservation) %></td>
+        <td><%= reservation.room.introduction %></td>
+        <td>¥<%= reservation.total_price %></td>
+        <td><%= reservation.checkin_at.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.checkout_at.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+        <td>
+          <%= link_to "予約を削除" , reservation , method: :delete , data: { comfilm: "本当に削除しますか？" } %>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
+    <td>現在登録している施設はありません</td>
+  <% end %>
+  </tbody>
+</table>

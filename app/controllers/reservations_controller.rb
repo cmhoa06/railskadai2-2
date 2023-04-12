@@ -10,6 +10,21 @@ class ReservationsController < ApplicationController
     
   end
 
+  def confirm
+      @reservation = Reservation.new(reservation_params)
+      @user = current_user
+      @room = Room.find(params[:reservation][:room_id])
+      binding.pry
+      @total_day = (@reservation.checkout_at - @reservation.checkin_at).to_i
+      @total_price = @total_day * @room.fee * @reservation.person_count
+     binding.pry
+      if @total_day <= 0
+        redirect_to @room, alert:"終了日は開始日より後にしてください"
+      elsif @reservation.person_count <=0 
+        redirect_to @room, alert:"正しい人数を入力してください"
+      end
+  end
+
   def create
     @room = Room.find(params[:reservation][:room_id])
     @user = User.find_by(params[:reservation][:room_id])
@@ -27,7 +42,8 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @reservation = Reservation.find(params[:id])
+    #@reservation = Reservation.find(params[:id])
+    
   end
 
   def edit

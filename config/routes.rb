@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   end
 
   get "room/search", to: "rooms#search"
-
+  get "reservation/confirm", to: "reservations#confirm"
+  post "reservation/confirm", to: "reservations#confirm"
+  get "rooms/:id/reservations", to: "rooms#show"
   resources :users do
     collection do
       get "search"
