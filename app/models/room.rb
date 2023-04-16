@@ -9,13 +9,6 @@ class Room < ApplicationRecord
   #has_one :reservation
   has_many :reservations 
 
-  def self.search(search)
-    if search != ""
-      Room.where(['room_name LIKE(?) OR introduction LIKE(?) OR address LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%"])
-    else
-      Room.all
-    end
-
     def self.ransackable_attributes(auth_object = nil)
       ["address", "created_at", "fee", "id", "image", "introduction", "name", "updated_at", "user_id"]
     end
@@ -24,4 +17,4 @@ class Room < ApplicationRecord
       ["reservations", "user"]
     end
   end
-end
+

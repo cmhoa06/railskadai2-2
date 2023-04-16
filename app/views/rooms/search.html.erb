@@ -1,11 +1,3 @@
-<%= form_tag rooms_path, method: :get do %>
-  <%= label_tag :area, "エリア:" %>
-  <%= select_tag :area, options_for_select(["東京", "大阪", "京都", "札幌"], params[:area]), include_blank: true %>
-  <%= label_tag :keyword, "キーワード:" %>
-  <%= text_field_tag :keyword, params[:keyword] %>
-  <%= submit_tag "検索" %>
-<% end %>
-
 <h2>検索結果：<%= @results.count %>件</h2>
 <table>
   <thead>
@@ -30,7 +22,7 @@
                 <% end %>
             </div>
           </td>
-          <td><%= link_to name, room_path(room) %></td>
+          <td><%= link_to room.name, room_path(room) %></td>
           <td><%= room.introduction %></td>
           <td><%= room.fee %></td>
           <td><%= room.address %></td>

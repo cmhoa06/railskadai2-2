@@ -1,7 +1,20 @@
-<p>ようこそ</p>
+<h1>Potepan Shareで<br/>
+    まだ体験したことのない<br/>
+    旅をしよう
+</h1>
 
+<h2>キーワード検索</h2>
+<%= search_form_for @q, url: search_rooms_path do |f| %>
+  <%= f.label :name_or_introduction_gt, 'キーワード' %>
+  <%= f.search_field :name_or_introduction_gt %>
+  <br>
+  <%= f.submit '検索' %>
+<% end %>
 
-  <p>
-  <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag "検索", name: nil %>
-  </p>
+<h2>住所検索</h2>
+<%= search_form_for @q, url: search_rooms_path do |f| %>
+  <%= f.label :address_cont, '住所' %>
+  <%= f.search_field :address_cont %>
+  <br>
+  <%= f.submit '検索' %>
+<% end %>

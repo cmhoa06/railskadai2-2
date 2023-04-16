@@ -27,7 +27,7 @@
     </tr>
   </div>
 
-<%= form_with model: @reservation , method: :post, url: reservation_confirm_path do |f| %>
+<%= form_with model: @reservation ,  method: :post , url: confirm_reservations_path do |f| %>
   <div>
     <%= f.label :チェックイン日 %>
     <%= f.date_field :checkin_at %>
@@ -41,7 +41,7 @@
     <%= f.text_field :person_count %>
   </div>
     <%= f.hidden_field :room_id, value: @room.id %>
-    <%= f.hidden_field :user_id, value: @user.id%>
+    <%= f.hidden_field :user_id, value: @user.id %>
     
   <%= f.submit "予約する" %>
 <% end %>  

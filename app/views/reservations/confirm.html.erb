@@ -15,7 +15,7 @@
 
   <tr>
       <th>使用日数 :</th>
-      <td><%= (@reservation.checkout_at - @reservation.checkin_at).to_i %>日</td>
+      <td><%= @reservation.total_day %>日</td>
   </tr>
 
   <tr>
@@ -25,7 +25,7 @@
 
   <tr>
       <th>合計金額:</th>
-      <td><%= @reservation.room.fee * @reservation.person_count * (@reservation.checkout_at - @reservation.checkin_at).to_i %></td>
+      <td>¥<%= @reservation.total_price %></td>
   </tr>
 
 <%= form_with model: @reservation, url: reservations_path, local: true do |f| %>

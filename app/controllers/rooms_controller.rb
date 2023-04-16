@@ -1,4 +1,7 @@
 class RoomsController < ApplicationController
+
+  before_action :set_q, only: [:index, :search]
+
   def index
     
     @rooms = Room.all
@@ -13,7 +16,7 @@ class RoomsController < ApplicationController
   def create
     @user = current_user
     @room = Room.new(room_params)
-    
+    @room.user_id = current_user.id
 
     if @room.save
       flash[:notice] = '宿泊施設を登録しました'
@@ -26,9 +29,6 @@ class RoomsController < ApplicationController
   def show
     @user = current_user
     @room = Room.find(params[:id])
-    @rooms = Room.all
-    @rooms = @rooms.where(area: params[:area]) if params[:area].present?
-    @rooms = @rooms.where("name like?" , "%#{params[:keyword]}%") if params[:keyword].present?
     @reservation = Reservation.new
   end
 
@@ -60,7 +60,10 @@ class RoomsController < ApplicationController
 
   private
   def room_params
-    params.require(:room).permit(:name, :introduction, :fee, :address, :image, :user_id)
+    params.require(:room).permit(:name, :introduction, :fee, :address, :image, :user_id , :room_id)
   end
   
+  def set_q
+    @q = Room.ransack(params[:q])
+  end
 end
