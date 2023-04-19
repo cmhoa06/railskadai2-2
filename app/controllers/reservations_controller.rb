@@ -1,7 +1,9 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @user = current_user
-    @reservations = Reservation.all
+    @reservations = current_user.reservations
   end
 
   def new

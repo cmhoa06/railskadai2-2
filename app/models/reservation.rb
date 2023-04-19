@@ -4,7 +4,8 @@ class Reservation < ApplicationRecord
 
   validates :checkin_at, presence: true
   validates :checkout_at, presence: true
-  validates :person_count, presence: true
+  validates :person_count, presence: true , numericality: {only_integer: true, greater_than: 0}
+
   validate :start_end_check
 
   has_one_attached :image

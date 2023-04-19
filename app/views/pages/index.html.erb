@@ -1,3 +1,4 @@
+<div class="firstview">
 <h1>Potepan Shareで<br/>
     まだ体験したことのない<br/>
     旅をしよう
@@ -18,3 +19,9 @@
   <br>
   <%= f.submit '検索' %>
 <% end %>
+</div>
+
+<%= link_to '東京都',{:controller=>"rooms",:action=>"search",:q=>{:address_cont=>('東京都')}} %>
+<%= link_to '大阪府',{:controller=>"rooms",:action=>"search",:q=>{:address_cont=>('大阪府')}} %>
+<%= link_to '京都府',{:controller=>"rooms",:action=>"search",:q=>{:address_cont=>('京都府')}} %>
+<%= link_to '札幌市',{:controller=>"rooms",:action=>"search",:q=>{:address_cont=>('札幌市')}} %>

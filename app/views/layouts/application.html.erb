@@ -12,17 +12,23 @@
 
   <body>
     <header>
-      <div>
+     <div>
         <%= link_to "Top", root_path %>
       </div>
         <nav>
           <% if user_signed_in? %>
-            <%= link_to "施設新規登録", new_room_path %>
-            <%= link_to '予約済み施設一覧', reservations_path %>
-            <%= link_to "登録済み施設一覧",rooms_path %>
-            <%= link_to 'プロフィール変更', edit_user_registration_path %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-              
+           <ul class="menu">
+             <li class="menu__single">
+               <%= current_user.name %>
+                <ul class="menu__second-level">
+                  <li><%= link_to "施設新規登録", new_room_path %></li>
+                  <li><%= link_to '予約済み施設一覧', reservations_path %></li>
+                  <li><%= link_to "登録済み施設一覧",rooms_path %></li>
+                  <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
+                  <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                </ul>
+              </li>
+            </ul>
               <div class="icon">
                 <% if current_user.image? %>
                     <%= image_tag  current_user.image.thumb.url %>
@@ -37,8 +43,6 @@
           <% end %>
         </nav>
       </header>
-
-  
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

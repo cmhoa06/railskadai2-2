@@ -3,7 +3,7 @@
 <%= link_to "戻る",:back %>
 <%= link_to "編集", edit_room_path(@room) %>
 
-  <div>
+  <div class="room_image">
     <% if @room.image?  %>
       <%= image_tag @room.image.url %>
     <% else %>
@@ -40,8 +40,11 @@
     <%= f.label :人数 %>
     <%= f.text_field :person_count %>
   </div>
+
     <%= f.hidden_field :room_id, value: @room.id %>
     <%= f.hidden_field :user_id, value: @user.id %>
-    
-  <%= f.submit "予約する" %>
+
+  <div class="actions">
+    <%= f.submit "予約する" %>
+  </div>
 <% end %>  

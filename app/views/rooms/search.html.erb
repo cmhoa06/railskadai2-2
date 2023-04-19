@@ -14,7 +14,7 @@
   <% @results.each do |room| %>
       <tr>
           <td>
-            <div>
+             <div class="room_image">
                 <% if room.image? %>
                     <%= image_tag  room.image.url %>
                 <% else %>

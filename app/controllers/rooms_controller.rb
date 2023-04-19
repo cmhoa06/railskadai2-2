@@ -3,7 +3,6 @@ class RoomsController < ApplicationController
   before_action :set_q, only: [:index, :search]
 
   def index
-    
     @rooms = Room.all
     @user = current_user
   end
@@ -62,7 +61,7 @@ class RoomsController < ApplicationController
   def room_params
     params.require(:room).permit(:name, :introduction, :fee, :address, :image, :user_id , :room_id)
   end
-  
+
   def set_q
     @q = Room.ransack(params[:q])
   end
