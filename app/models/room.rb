@@ -16,5 +16,13 @@ class Room < ApplicationRecord
     def self.ransackable_associations(auth_object = nil)
       ["reservations", "user"]
     end
+
+    def self.search(search)
+      if search != ""
+        Room.where(['room_name LIKE(?) OR introduction LIKE(?) OR address LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%"])
+      else
+        Room.all
+      end
+    end
   end
 
