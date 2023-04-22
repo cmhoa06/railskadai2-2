@@ -16,22 +16,20 @@ class ReservationsController < ApplicationController
       @reservation = Reservation.new(reservation_params)
       @user = current_user
       @room = Room.find(params[:reservation][:room_id])
-      if @reservation.checkin_at == nil
-        redirect_to @room, alert:"(開始日）を入力してください"
-      elsif @reservation.checkout_at == nil
-        redirect_to @room, alert:"(終了日）を入力してください"
-      elsif @reservation.checkout_at < @reservation.checkin_at
-        redirect_to @room, alert:"(終了日）は開始日以降の日付にしてください"
+      if @reservation.checkin_at. == nil
+        redirect_to @room, alert:"開始日を入力してください" and return
       end
-     
+      if @reservation.checkout_at. == nil
+        redirect_to @room, alert:"終了日を入力してください" and return
+      end
+      if @reservation.checkout_at < @reservation.checkin_at
+        redirect_to @room, alert:"終了日は開始日以降の日付にしてください" and return
+      end
+      if @reservation.person_count == nil
+        redirect_to @room, alert:"正しい人数を入力してください" and return
+      end
       @total_day = (@reservation.checkout_at - @reservation.checkin_at).to_i 
-      @total_price = (total_day * person_count * room.fee)
-
-      if @total_day == 0
-        redirect_to @room, alert:"終了日は開始日より後にしてください"
-      elsif @reservation.person_count == 0
-        redirect_to @room, alert:"正しい人数を入力してください"
-      end
+      @total_price = (@total_day * @reservation.person_count * @room.fee)
   end
 
   def create

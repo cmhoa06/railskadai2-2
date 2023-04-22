@@ -1,10 +1,11 @@
 class RoomsController < ApplicationController
-
+  before_action :authenticate_user!, except: [:show] 
   before_action :set_q, only: [:index, :search]
 
   def index
     @rooms = Room.all
     @user = current_user
+    @rooms = current_user.rooms #ログインユーザーの登録施設のみ表示
   end
 
   def new

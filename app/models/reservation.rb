@@ -12,11 +12,11 @@ class Reservation < ApplicationRecord
   has_one_attached :image
   def start_end_check
     if checkin_at == nil
-      errors.add(:checkin_at,"(開始日）を入力してください")
+      errors.add(:checkin_at,"開始日を入力してください")
     elsif checkout_at == nil
-      errors.add(:checkout_at,"(終了日）を入力してください")
+      errors.add(:checkout_at,"終了日を入力してください")
     elsif checkout_at < checkin_at
-      errors.add(:checkout_at,"(終了日）は開始日以降の日付にしてください")
+      errors.add(:checkout_at,"終了日は開始日以降の日付にしてください")
     end
   end
 
