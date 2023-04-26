@@ -3,21 +3,18 @@ class RoomsController < ApplicationController
   before_action :set_q, only: [:index, :search]
 
   def index
-    @rooms = Room.all
     @user = current_user
     @rooms = current_user.rooms #ログインユーザーの登録施設のみ表示
   end
 
   def new
-    @user = current_user
-    @room = Room.new
+    @room = current_user.rooms.build
   end
 
   def create
     @user = current_user
     @room = Room.new(room_params)
     @room.user_id = current_user.id
-
     if @room.save
       flash[:notice] = '宿泊施設を登録しました'
       redirect_to @room 
@@ -60,7 +57,7 @@ class RoomsController < ApplicationController
 
   private
   def room_params
-    params.require(:room).permit(:name, :introduction, :fee, :address, :image, :user_id , :room_id)
+    params.require(:room).permit(:name, :introduction, :fee, :address, :image, :room_id).merge(user_id: current_user.id)
   end
 
   def set_q

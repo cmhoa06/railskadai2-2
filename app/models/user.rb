@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :reservations
-  has_many :rooms , through: :reservations 
+  has_many :rooms 
   mount_uploader :image, ImageUploader
 
   validates :name, presence: true
