@@ -1,0 +1,32 @@
+<h2>施設の編集</h2>
+
+<%= form_with model:@room do |f| %>
+  <div>
+    <%= f.label :施設名 %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :住所 %><br>
+    <%= f.text_field :address %>
+  </div>
+
+  <div>
+    <%= f.label :紹介文 %><br>
+    <%= f.text_area :introduction %>
+  </div>
+
+  <div>
+    <%= f.label :料金 %><br>
+    <%= f.text_field :fee %>
+  </div>
+
+  <div>
+    <%= f.label :画像 %><br>
+    <%= f.file_field :image %>
+  </div>
+   
+  <div class="actions">
+    <%= f.submit "登録" %>
+  </div>
+<% end %>

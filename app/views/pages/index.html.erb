@@ -1,0 +1,27 @@
+<div class="firstview">
+<h1>Potepan Shareで<br/>
+    まだ体験したことのない<br/>
+    旅をしよう
+</h1>
+
+<h2>キーワード検索</h2>
+<%= search_form_for @q, url: search_rooms_path do |f| %>
+  <%= f.label :name_or_introduction_cont, 'キーワード' %>
+  <%= f.search_field :name_or_introduction_cont %>
+  <br>
+  <%= f.submit '検索' %>
+<% end %>
+
+<h2>住所検索</h2>
+<%= search_form_for @q, url: search_rooms_path do |f| %>
+  <%= f.label :address_cont, '住所' %>
+  <%= f.search_field :address_cont %>
+  <br>
+  <%= f.submit '検索' %>
+<% end %>
+</div>
+
+<%= link_to '東京都',{:controller=>"rooms",:action=>"search",:q=>{:address_cont=>('東京都')}} %>
+<%= link_to '大阪府',{:controller=>"rooms",:action=>"search",:q=>{:address_cont=>('大阪府')}} %>
+<%= link_to '京都府',{:controller=>"rooms",:action=>"search",:q=>{:address_cont=>('京都府')}} %>
+<%= link_to '札幌市',{:controller=>"rooms",:action=>"search",:q=>{:address_cont=>('札幌市')}} %>

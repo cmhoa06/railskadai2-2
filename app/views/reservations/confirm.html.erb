@@ -1,0 +1,42 @@
+<h2>予約の確認</h2>
+
+<%= flash[:notice] %>
+<%= flash[:alert] %>
+
+  <tr>
+      <th>開始日:</th>
+      <td><%= @reservation.checkin_at %></td>
+  </tr>
+
+  <tr>
+      <th>終了日:</th>
+      <td><%= @reservation.checkout_at %></td>
+  </tr>
+
+  <tr>
+      <th>使用日数 :</th>
+      <td><%= @reservation.total_day %>日</td>
+  </tr>
+
+  <tr>
+      <th>人数:</th>
+      <td><%= @reservation.person_count %></td>
+  </tr>
+
+  <tr>
+      <th>合計金額:</th>
+      <td>¥<%= @reservation.total_price %></td>
+  </tr>
+
+<%= form_with model: @reservation, url: reservations_path, local: true do |f| %>
+
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+  <%= f.hidden_field :checkin_at , value: @reservation.checkin_at %>
+  <%= f.hidden_field :checkout_at , value: @reservation.checkout_at %>
+  <%= f.hidden_field :person_count , value: @reservation.person_count %>
+
+  <p>上記内容でよろしければ「予約を確定」を押してください。</p>
+  <%= f.submit "予約を確定" %>
+  <%= link_to 'ルーム詳細に戻る', room_path(@room.id) %>
+<% end %>

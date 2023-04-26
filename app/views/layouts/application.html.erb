@@ -7,10 +7,46 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' , 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+     <div>
+        <%= link_to "Top", root_path %>
+      </div>
+        <nav>
+          <% if user_signed_in? %>
+           <ul class="menu">
+             <li class="menu__single">
+               <%= current_user.name %>
+                <ul class="menu__second-level">
+                  <li><%= link_to "施設新規登録", new_room_path %></li>
+                  <li><%= link_to '予約済み施設一覧', reservations_path %></li>
+                  <li><%= link_to "登録済み施設一覧",rooms_path %></li>
+                  <li><%= link_to 'プロフィール変更', pages_show_path %></li>
+                  <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                </ul>
+              </li>
+            </ul>
+              <div class="icon">
+                <% if current_user.image? %>
+                    <%= image_tag  current_user.image.url ,  size: '70x70' %>
+                <% else %>
+                    <%= image_tag 'https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png' %>
+                <% end %>
+              </div>
+
+          <% else %>
+            <%= link_to '新規登録する', new_user_registration_path %>
+            <%= link_to 'ログイン', new_user_session_path %>
+          <% end %>
+        </nav>
+      </header>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
-</html>
+<html>

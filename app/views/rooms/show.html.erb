@@ -1,0 +1,50 @@
+<h2>施設詳細</h2>
+
+<%= link_to "戻る",:back %>
+<%= link_to "編集", edit_room_path(@room) %>
+
+  <div class="room_image">
+    <% if @room.image?  %>
+      <%= image_tag @room.image.url %>
+    <% else %>
+      <%= image_tag 'https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png' %>
+    <% end %>
+
+    <tr>
+      <td>ルーム名：<%= @room.name %></td>
+    </tr>
+
+    <tr>
+      <td>住所 : <%= @room.address %></td>
+    </tr>
+
+    <tr>
+      <td>ルーム詳細：<%= @room.introduction %></td>
+    </tr>
+
+    <tr>
+      <td>金額：￥<%= @room.fee %>〜</td>
+    </tr>
+  </div>
+
+<%= form_with model: @reservation ,  method: :post , url: confirm_reservations_path do |f| %>
+  <div>
+    <%= f.label :チェックイン日 %>
+    <%= f.date_field :checkin_at %>
+  </div>
+  <div>
+    <%= f.label :チェックアウト日 %>
+    <%= f.date_field :checkout_at %>
+  </div>
+  <div>
+    <%= f.label :人数 %>
+    <%= f.text_field :person_count %>
+  </div>
+
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.hidden_field :user_id, value: @user.id %>
+
+  <div class="actions">
+    <%= f.submit "予約する" %>
+  </div>
+<% end %>  
