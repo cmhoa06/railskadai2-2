@@ -7,6 +7,5 @@ class User < ApplicationRecord
   has_many :reservations
   has_many :rooms 
   mount_uploader :image, ImageUploader
-
   validates :name, presence: true
 end
